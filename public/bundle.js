@@ -65,15 +65,15 @@
 	
 	var _redux = __webpack_require__(162);
 	
-	var _reduxPromise = __webpack_require__(177);
+	var _reduxPromise = __webpack_require__(178);
 	
 	var _reduxPromise2 = _interopRequireDefault(_reduxPromise);
 	
-	var _app = __webpack_require__(184);
+	var _app = __webpack_require__(185);
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _reducers = __webpack_require__(187);
+	var _reducers = __webpack_require__(188);
 	
 	var _reducers2 = _interopRequireDefault(_reducers);
 	
@@ -19200,11 +19200,11 @@
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _hoistNonReactStatics = __webpack_require__(175);
+	var _hoistNonReactStatics = __webpack_require__(176);
 	
 	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
 	
-	var _invariant = __webpack_require__(176);
+	var _invariant = __webpack_require__(177);
 	
 	var _invariant2 = _interopRequireDefault(_invariant);
 	
@@ -19626,23 +19626,23 @@
 	
 	var _createStore2 = _interopRequireDefault(_createStore);
 	
-	var _combineReducers = __webpack_require__(170);
+	var _combineReducers = __webpack_require__(171);
 	
 	var _combineReducers2 = _interopRequireDefault(_combineReducers);
 	
-	var _bindActionCreators = __webpack_require__(172);
+	var _bindActionCreators = __webpack_require__(173);
 	
 	var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
 	
-	var _applyMiddleware = __webpack_require__(173);
+	var _applyMiddleware = __webpack_require__(174);
 	
 	var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
 	
-	var _compose = __webpack_require__(174);
+	var _compose = __webpack_require__(175);
 	
 	var _compose2 = _interopRequireDefault(_compose);
 	
-	var _warning = __webpack_require__(171);
+	var _warning = __webpack_require__(172);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -19678,7 +19678,7 @@
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _symbolObservable = __webpack_require__(168);
+	var _symbolObservable = __webpack_require__(169);
 	
 	var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
 	
@@ -19936,17 +19936,18 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var getPrototype = __webpack_require__(165),
-	    isHostObject = __webpack_require__(166),
-	    isObjectLike = __webpack_require__(167);
+	    isHostObject = __webpack_require__(167),
+	    isObjectLike = __webpack_require__(168);
 	
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
 	
 	/** Used for built-in method references. */
-	var objectProto = Object.prototype;
+	var funcProto = Function.prototype,
+	    objectProto = Object.prototype;
 	
 	/** Used to resolve the decompiled source of functions. */
-	var funcToString = Function.prototype.toString;
+	var funcToString = funcProto.toString;
 	
 	/** Used to check objects for own properties. */
 	var hasOwnProperty = objectProto.hasOwnProperty;
@@ -19956,7 +19957,7 @@
 	
 	/**
 	 * Used to resolve the
-	 * [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
 	 * of values.
 	 */
 	var objectToString = objectProto.toString;
@@ -19970,8 +19971,7 @@
 	 * @since 0.8.0
 	 * @category Lang
 	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is a plain object,
-	 *  else `false`.
+	 * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
 	 * @example
 	 *
 	 * function Foo() {
@@ -20009,27 +20009,39 @@
 
 /***/ },
 /* 165 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	/* Built-in method references for those with the same name as other `lodash` methods. */
-	var nativeGetPrototype = Object.getPrototypeOf;
+	var overArg = __webpack_require__(166);
 	
-	/**
-	 * Gets the `[[Prototype]]` of `value`.
-	 *
-	 * @private
-	 * @param {*} value The value to query.
-	 * @returns {null|Object} Returns the `[[Prototype]]`.
-	 */
-	function getPrototype(value) {
-	  return nativeGetPrototype(Object(value));
-	}
+	/** Built-in value references. */
+	var getPrototype = overArg(Object.getPrototypeOf, Object);
 	
 	module.exports = getPrototype;
 
 
 /***/ },
 /* 166 */
+/***/ function(module, exports) {
+
+	/**
+	 * Creates a unary function that invokes `func` with its argument transformed.
+	 *
+	 * @private
+	 * @param {Function} func The function to wrap.
+	 * @param {Function} transform The argument transform.
+	 * @returns {Function} Returns the new function.
+	 */
+	function overArg(func, transform) {
+	  return function(arg) {
+	    return func(transform(arg));
+	  };
+	}
+	
+	module.exports = overArg;
+
+
+/***/ },
+/* 167 */
 /***/ function(module, exports) {
 
 	/**
@@ -20055,7 +20067,7 @@
 
 
 /***/ },
-/* 167 */
+/* 168 */
 /***/ function(module, exports) {
 
 	/**
@@ -20090,18 +20102,18 @@
 
 
 /***/ },
-/* 168 */
+/* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {/* global window */
 	'use strict';
 	
-	module.exports = __webpack_require__(169)(global || window || this);
+	module.exports = __webpack_require__(170)(global || window || this);
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 169 */
+/* 170 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20126,7 +20138,7 @@
 
 
 /***/ },
-/* 170 */
+/* 171 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20140,7 +20152,7 @@
 	
 	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
 	
-	var _warning = __webpack_require__(171);
+	var _warning = __webpack_require__(172);
 	
 	var _warning2 = _interopRequireDefault(_warning);
 	
@@ -20258,7 +20270,7 @@
 	}
 
 /***/ },
-/* 171 */
+/* 172 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20288,7 +20300,7 @@
 	}
 
 /***/ },
-/* 172 */
+/* 173 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -20344,7 +20356,7 @@
 	}
 
 /***/ },
-/* 173 */
+/* 174 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20355,7 +20367,7 @@
 	
 	exports["default"] = applyMiddleware;
 	
-	var _compose = __webpack_require__(174);
+	var _compose = __webpack_require__(175);
 	
 	var _compose2 = _interopRequireDefault(_compose);
 	
@@ -20407,7 +20419,7 @@
 	}
 
 /***/ },
-/* 174 */
+/* 175 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -20452,7 +20464,7 @@
 	}
 
 /***/ },
-/* 175 */
+/* 176 */
 /***/ function(module, exports) {
 
 	/**
@@ -20508,7 +20520,7 @@
 
 
 /***/ },
-/* 176 */
+/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20565,7 +20577,7 @@
 
 
 /***/ },
-/* 177 */
+/* 178 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20576,7 +20588,7 @@
 	
 	exports['default'] = promiseMiddleware;
 	
-	var _fluxStandardAction = __webpack_require__(178);
+	var _fluxStandardAction = __webpack_require__(179);
 	
 	function isPromise(val) {
 	  return val && typeof val.then === 'function';
@@ -20603,7 +20615,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 178 */
+/* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -20614,7 +20626,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 	
-	var _lodashIsplainobject = __webpack_require__(179);
+	var _lodashIsplainobject = __webpack_require__(180);
 	
 	var _lodashIsplainobject2 = _interopRequireDefault(_lodashIsplainobject);
 	
@@ -20633,7 +20645,7 @@
 	}
 
 /***/ },
-/* 179 */
+/* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -20644,9 +20656,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseFor = __webpack_require__(180),
-	    isArguments = __webpack_require__(181),
-	    keysIn = __webpack_require__(182);
+	var baseFor = __webpack_require__(181),
+	    isArguments = __webpack_require__(182),
+	    keysIn = __webpack_require__(183);
 	
 	/** `Object#toString` result references. */
 	var objectTag = '[object Object]';
@@ -20742,7 +20754,7 @@
 
 
 /***/ },
-/* 180 */
+/* 181 */
 /***/ function(module, exports) {
 
 	/**
@@ -20796,16 +20808,16 @@
 
 
 /***/ },
-/* 181 */
+/* 182 */
 /***/ function(module, exports) {
 
 	/**
-	 * lodash 3.0.8 (Custom Build) <https://lodash.com/>
+	 * lodash (Custom Build) <https://lodash.com/>
 	 * Build: `lodash modularize exports="npm" -o ./`
-	 * Copyright 2012-2016 The Dojo Foundation <http://dojofoundation.org/>
+	 * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+	 * Released under MIT license <https://lodash.com/license>
 	 * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
-	 * Copyright 2009-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-	 * Available under MIT license <https://lodash.com/license>
+	 * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 */
 	
 	/** Used as references for various `Number` constants. */
@@ -20823,7 +20835,8 @@
 	var hasOwnProperty = objectProto.hasOwnProperty;
 	
 	/**
-	 * Used to resolve the [`toStringTag`](http://ecma-international.org/ecma-262/6.0/#sec-object.prototype.tostring)
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
 	 * of values.
 	 */
 	var objectToString = objectProto.toString;
@@ -20832,38 +20845,15 @@
 	var propertyIsEnumerable = objectProto.propertyIsEnumerable;
 	
 	/**
-	 * The base implementation of `_.property` without support for deep paths.
-	 *
-	 * @private
-	 * @param {string} key The key of the property to get.
-	 * @returns {Function} Returns the new function.
-	 */
-	function baseProperty(key) {
-	  return function(object) {
-	    return object == null ? undefined : object[key];
-	  };
-	}
-	
-	/**
-	 * Gets the "length" property value of `object`.
-	 *
-	 * **Note:** This function is used to avoid a [JIT bug](https://bugs.webkit.org/show_bug.cgi?id=142792)
-	 * that affects Safari on at least iOS 8.1-8.3 ARM64.
-	 *
-	 * @private
-	 * @param {Object} object The object to query.
-	 * @returns {*} Returns the "length" value.
-	 */
-	var getLength = baseProperty('length');
-	
-	/**
 	 * Checks if `value` is likely an `arguments` object.
 	 *
 	 * @static
 	 * @memberOf _
+	 * @since 0.1.0
 	 * @category Lang
 	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @returns {boolean} Returns `true` if `value` is an `arguments` object,
+	 *  else `false`.
 	 * @example
 	 *
 	 * _.isArguments(function() { return arguments; }());
@@ -20873,7 +20863,7 @@
 	 * // => false
 	 */
 	function isArguments(value) {
-	  // Safari 8.1 incorrectly makes `arguments.callee` enumerable in strict mode.
+	  // Safari 8.1 makes `arguments.callee` enumerable in strict mode.
 	  return isArrayLikeObject(value) && hasOwnProperty.call(value, 'callee') &&
 	    (!propertyIsEnumerable.call(value, 'callee') || objectToString.call(value) == argsTag);
 	}
@@ -20885,6 +20875,7 @@
 	 *
 	 * @static
 	 * @memberOf _
+	 * @since 4.0.0
 	 * @category Lang
 	 * @param {*} value The value to check.
 	 * @returns {boolean} Returns `true` if `value` is array-like, else `false`.
@@ -20903,7 +20894,7 @@
 	 * // => false
 	 */
 	function isArrayLike(value) {
-	  return value != null && isLength(getLength(value)) && !isFunction(value);
+	  return value != null && isLength(value.length) && !isFunction(value);
 	}
 	
 	/**
@@ -20912,9 +20903,11 @@
 	 *
 	 * @static
 	 * @memberOf _
+	 * @since 4.0.0
 	 * @category Lang
 	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is an array-like object, else `false`.
+	 * @returns {boolean} Returns `true` if `value` is an array-like object,
+	 *  else `false`.
 	 * @example
 	 *
 	 * _.isArrayLikeObject([1, 2, 3]);
@@ -20938,9 +20931,10 @@
 	 *
 	 * @static
 	 * @memberOf _
+	 * @since 0.1.0
 	 * @category Lang
 	 * @param {*} value The value to check.
-	 * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
+	 * @returns {boolean} Returns `true` if `value` is a function, else `false`.
 	 * @example
 	 *
 	 * _.isFunction(_);
@@ -20951,8 +20945,7 @@
 	 */
 	function isFunction(value) {
 	  // The use of `Object#toString` avoids issues with the `typeof` operator
-	  // in Safari 8 which returns 'object' for typed array and weak map constructors,
-	  // and PhantomJS 1.9 which returns 'function' for `NodeList` instances.
+	  // in Safari 8-9 which returns 'object' for typed array and other constructors.
 	  var tag = isObject(value) ? objectToString.call(value) : '';
 	  return tag == funcTag || tag == genTag;
 	}
@@ -20960,10 +20953,12 @@
 	/**
 	 * Checks if `value` is a valid array-like length.
 	 *
-	 * **Note:** This function is loosely based on [`ToLength`](http://ecma-international.org/ecma-262/6.0/#sec-tolength).
+	 * **Note:** This method is loosely based on
+	 * [`ToLength`](http://ecma-international.org/ecma-262/7.0/#sec-tolength).
 	 *
 	 * @static
 	 * @memberOf _
+	 * @since 4.0.0
 	 * @category Lang
 	 * @param {*} value The value to check.
 	 * @returns {boolean} Returns `true` if `value` is a valid length, else `false`.
@@ -20987,11 +20982,13 @@
 	}
 	
 	/**
-	 * Checks if `value` is the [language type](https://es5.github.io/#x8) of `Object`.
-	 * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+	 * Checks if `value` is the
+	 * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+	 * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
 	 *
 	 * @static
 	 * @memberOf _
+	 * @since 0.1.0
 	 * @category Lang
 	 * @param {*} value The value to check.
 	 * @returns {boolean} Returns `true` if `value` is an object, else `false`.
@@ -21020,6 +21017,7 @@
 	 *
 	 * @static
 	 * @memberOf _
+	 * @since 4.0.0
 	 * @category Lang
 	 * @param {*} value The value to check.
 	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
@@ -21045,7 +21043,7 @@
 
 
 /***/ },
-/* 182 */
+/* 183 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -21056,8 +21054,8 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var isArguments = __webpack_require__(181),
-	    isArray = __webpack_require__(183);
+	var isArguments = __webpack_require__(182),
+	    isArray = __webpack_require__(184);
 	
 	/** Used to detect unsigned integer values. */
 	var reIsUint = /^\d+$/;
@@ -21183,7 +21181,7 @@
 
 
 /***/ },
-/* 183 */
+/* 184 */
 /***/ function(module, exports) {
 
 	/**
@@ -21369,7 +21367,7 @@
 
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21382,7 +21380,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _containerCounter = __webpack_require__(185);
+	var _containerCounter = __webpack_require__(186);
 	
 	var _containerCounter2 = _interopRequireDefault(_containerCounter);
 	
@@ -21399,7 +21397,7 @@
 	exports.default = App;
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21418,7 +21416,7 @@
 	
 	var _redux = __webpack_require__(162);
 	
-	var _index = __webpack_require__(186);
+	var _index = __webpack_require__(187);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21500,7 +21498,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Counter);
 
 /***/ },
-/* 186 */
+/* 187 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -21537,7 +21535,7 @@
 	}
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21548,7 +21546,7 @@
 	
 	var _redux = __webpack_require__(162);
 	
-	var _reducerCounter = __webpack_require__(188);
+	var _reducerCounter = __webpack_require__(189);
 	
 	var _reducerCounter2 = _interopRequireDefault(_reducerCounter);
 	
@@ -21561,7 +21559,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 188 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21585,7 +21583,7 @@
 	  return state;
 	};
 	
-	var _index = __webpack_require__(186);
+	var _index = __webpack_require__(187);
 
 /***/ }
 /******/ ]);
