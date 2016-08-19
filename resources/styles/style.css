@@ -8,3 +8,7 @@
 .modal-backdrop{
     z-index: 10;
 }​
+
+.gm-style{
+  cursor: wait !important;
+}

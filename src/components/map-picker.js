@@ -18,6 +18,7 @@ export default class MapPicker extends Component{
 
     mapClicked({x, y, lat, lng, event}){
       this.setState({lat, lng})
+      console.log(event)
     }
 
     handleExit(){
@@ -36,14 +37,15 @@ export default class MapPicker extends Component{
           <Modal.Header closeButton>
             <Modal.Title>Map Picker</Modal.Title>
           </Modal.Header>
-          <div style= {{height: '500px', position: 'relative'}}>
+          <div style= {{height: '500px', position: 'relative', cursor: 'wait !important'}}>
+
               <HotSearch searchCallBack={this.handleSearch.bind(this)}/>
              <GoogleMap
                 onClick={this.mapClicked.bind(this)}
                 bootstrapURLKeys={{key: 'AIzaSyDhPvOWKUk2CeJxbkvS4zWA_hbZ_B5SbsI'}/*That's my key from my google account with ewhite@conetec.com*/}
                 center={this.props.center}
                 zoom={this.state.zoom}>
-              <ConeMarker lat={this.state.lat} lng={this.state.lng} text={''}/>
+                <ConeMarker lat={this.state.lat} lng={this.state.lng} text={''}/>
             </GoogleMap>
           </div>
       </Modal>

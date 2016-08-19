@@ -16,7 +16,7 @@ export default class HotSearch extends React.Component{
       var places = this.searchBox.getPlaces();
       if (places.length > 0){ //because searchbox.getplaces() returns an array, if it's empty it means it couldn't find a location
         this.props.searchCallBack(places[0].geometry.location.lat(), places[0].geometry.location.lng())
-        /*right now I've only cared about the location but theirs a lot of properties in the places object that could be useful if you
+        /*right now I've only cared about the location but there's a lot of properties in the places object that could be useful if you
         wanted to have more verbose feedback to the user*/
       }
     })
