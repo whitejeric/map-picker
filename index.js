@@ -12,7 +12,7 @@ if (process.env.NODE_ENV !== 'production') {
   console.log('Using dev settings...');
   console.log('Root of project, index.html, located at ' + __dirname + '/index.html');
 
-  app.use(express.static(__dirname + '/static'));
+  app.use(express.static(__dirname));
 
   var webpack = require('webpack');
   var webpackDevMiddleware = require('webpack-dev-middleware');

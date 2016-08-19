@@ -1,9 +1,9 @@
 import React from 'react';
-import Counter from '../containers/container-counter';
+import Page from './temp-page'
 
 const App = () => (
   <div>
-    <Counter />
+    <Page />
   </div>
 )
 
